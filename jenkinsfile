@@ -1,0 +1,34 @@
+pipeline {
+    agent any 
+        
+        stages {
+            stage('Git Checkout'){
+                steps {
+                    sh 'cd /var/lib/jenkins/workspace/edureka-pipeline'
+                    sh 'sudo rm -rf *'
+                    sh 'ls -ltra'
+                    sh 'git clone "https://github.com/msh-r/Edureka-ABCTech.git"'
+                    sh 'cp /var/lib/jenkins/workspace/edureka-pipeline/Edureka-ABCTech/pom.xml /var/lib/jenkins/workspace/edureka-pipeline/pom.xml'
+                    sh 'pwd'
+                    sh 'ls -ltra'
+                }
+            }
+            stage('Code Compile'){
+                steps {
+                    sh 'mvn clean'
+                    sh 'mvn compile'
+                }
+            } 
+            
+            stage('Unit Test'){
+                steps {
+                    sh 'mvn test'
+                }
+            }
+            stage('Code Package'){
+                steps {
+                    sh 'mvn package'
+                }
+            }
+        }
+}    
