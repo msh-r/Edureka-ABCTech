@@ -33,13 +33,16 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<plugins>
-			 <plugin>
+	        <plugins>
+			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.2.2</version>
-            </plugin>
-			<plugin>
+				<configuration>
+        				<webxml>WEB-INF/web.xml</webxml> <!-- Specify the location of web.xml -->
+      				</configuration> 
+            		</plugin>
+		        <plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.version}</version>
