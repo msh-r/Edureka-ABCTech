@@ -10,7 +10,7 @@ pipeline {
                     sh 'cd /var/lib/jenkins/workspace/'
                     sh 'sudo rm -rf *'
                     sh 'ls -ltra'
-                    sh 'git clone "https://github.com/msh-r/Edureka-ABCTech.git"'
+                    sh 'git clone "https:/github.com/msh-r/Edureka-ABCTech.git"'
                     sh 'cp /var/lib/jenkins/workspace/$jobName/Edureka-ABCTech/pom.xml /var/lib/jenkins/workspace/$jobName/pom.xml'
                     sh 'pwd'
                     sh 'ls -ltra'
