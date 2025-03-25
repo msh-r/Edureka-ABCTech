@@ -21,9 +21,9 @@
 	</properties>
 	<dependencies>
 		<dependency>
-    		<groupId>jakarta.servlet</groupId>
-    		<artifactId>jakarta.servlet-api</artifactId>
-    		<version>5.0.0</version> 
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version> <!-- or higher -->
     		<scope>provided</scope>
 		</dependency>
 
@@ -46,7 +46,6 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.2.2</version>
 				<configuration>
-    				<!--<webxml>/var/lib/jenkins/workspace/edureka-pipeline/Edureka-ABCTech/src/main/webapp/WEB-INF/web.xml</webxml> -->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>	
             </plugin>
