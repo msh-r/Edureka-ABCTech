@@ -1,25 +1,26 @@
+
+def jobName = env.JOB_NAME
+def buildNumber = env.BUILD_NUMBER
 pipeline {
     agent any 
         
         stages {
             stage('Git Checkout'){
                 steps {
-                    sh 'cd /var/lib/jenkins/workspace/edureka-pipeline'
+                    sh 'cd /var/lib/jenkins/workspace/'
                     sh 'sudo rm -rf *'
                     sh 'ls -ltra'
                     sh 'git clone "https://github.com/msh-r/Edureka-ABCTech.git"'
-                    sh 'cp /var/lib/jenkins/workspace/edureka-pipeline/Edureka-ABCTech/pom.xml /var/lib/jenkins/workspace/edureka-pipeline/pom.xml'
+                    sh 'cp /var/lib/jenkins/workspace/$jobName/Edureka-ABCTech/pom.xml /var/lib/jenkins/workspace/$jobName/pom.xml'
                     sh 'pwd'
                     sh 'ls -ltra'
                 }
             }
             stage('Code Compile'){
                 steps {
-                    sh 'mvn clean'
                     sh 'mvn compile'
                 }
             } 
-            
             stage('Unit Test'){
                 steps {
                     sh 'mvn test'
@@ -27,8 +28,34 @@ pipeline {
             }
             stage('Code Package'){
                 steps {
-                    sh 'mvn package'
+                    sh 'mvn clean package'
                 }
             }
-        }
-}    
+            stage('Build Docker Image'){
+			    steps{
+			        sh 'cp /var/lib/jenkins/workspace/$jobName/target/ABCtechnologies-1.0.war /var/lib/jenkins/workspace/$jobName/ABCtechnologies-1.0.war'
+				    sh 'mv /var/lib/jenkins/workspace/$jobName/Edureka-ABCTech/dockerfile /var/lib/jenkins/workspace/$jobName/'
+                    sh 'docker build -t hr67/abc_tech:$buildNumber .'
+
+			    }
+		    }
+		    stage('Push Docker Image'){ 
+			    steps{   
+			        withDockerRegistry([ credentialsId: "c052df26-4237-4a51-8db5-51d7b20782fc", url: "" ]){   
+			        sh 'docker push hr67/abc_tech:$BUILD_NUMBER'
+				    }
+			    }
+		    }
+			stage('Deploy as container'){
+			    steps{
+				sh 'docker run -itd -P hr67/abc_tech:$BUILD_NUMBER'
+			    }
+		    }
+
+	    }
+}
+
+
+
+
+ 
