@@ -11,7 +11,7 @@ pipeline {
                     sh 'sudo rm -rf *'
                     sh 'ls -ltra'
                     sh 'git clone "https:/github.com/msh-r/Edureka-ABCTech.git"'
-                    sh 'cp /var/lib/jenkins/workspace/$jobName/Edureka-ABCTech/pom.xml /var/lib/jenkins/workspace/$jobName/pom.xml'
+                    sh 'cp /var/lib/jenkins/workspace/${jobName}/Edureka-ABCTech/pom.xml /var/lib/jenkins/workspace/${jobName}/pom.xml'
                     sh 'pwd'
                     sh 'ls -ltra'
                 }
@@ -33,22 +33,22 @@ pipeline {
             }
             stage('Build Docker Image'){
 			    steps{
-			        sh 'cp /var/lib/jenkins/workspace/$jobName/target/ABCtechnologies-1.0.war /var/lib/jenkins/workspace/$jobName/ABCtechnologies-1.0.war'
-				    sh 'mv /var/lib/jenkins/workspace/$jobName/Edureka-ABCTech/dockerfile /var/lib/jenkins/workspace/$jobName/'
-                    sh 'docker build -t hr67/abc_tech:$buildNumber .'
+			        sh 'cp /var/lib/jenkins/workspace/${jobName}/target/ABCtechnologies-1.0.war /var/lib/jenkins/workspace/${jobName}/ABCtechnologies-1.0.war'
+				    sh 'mv /var/lib/jenkins/workspace/${jobName}/Edureka-ABCTech/dockerfile /var/lib/jenkins/workspace/${jobName}/'
+                    sh 'docker build -t hr67/abc_tech:${buildNumber} .'
 
 			    }
 		    }
 		    stage('Push Docker Image'){ 
 			    steps{   
 			        withDockerRegistry([ credentialsId: "c052df26-4237-4a51-8db5-51d7b20782fc", url: "" ]){   
-			        sh 'docker push hr67/abc_tech:$BUILD_NUMBER'
+			        sh 'docker push hr67/abc_tech:${buildNumber}'
 				    }
 			    }
 		    }
 			stage('Deploy as container'){
 			    steps{
-				sh 'docker run -itd -P hr67/abc_tech:$BUILD_NUMBER'
+				sh 'docker run -itd -P hr67/abc_tech:${buildNumber}'
 			    }
 		    }
 
