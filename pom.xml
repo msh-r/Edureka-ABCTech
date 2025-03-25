@@ -21,11 +21,11 @@
 	</properties>
 	<dependencies>
 		<dependency>
-    		<groupId>jakarta.servlet</groupId>
-    		<artifactId>jakarta.servlet-api</artifactId>
-    		<version>5.0.0</version> 
-    		<scope>provided</scope>
-		</dependency>
+    			<groupId>jakarta.servlet</groupId>
+    			<artifactId>jakarta.servlet-api</artifactId>
+    			<version>5.0.0</version> 
+    			<scope>provided</scope>
+			</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -42,13 +42,13 @@
 	<build>
 		<plugins>
 			 <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.2</version>
+                		<groupId>org.apache.maven.plugins</groupId>
+                		<artifactId>maven-war-plugin</artifactId>
+                		<version>3.2.2</version>
 				<configuration>
-    				<webxml>/var/lib/jenkins/workspace/edureka-pipeline/Edureka-ABCTech/src/main/webapp/WEB-INF/web.xml</webxml>
+    					<webxml>/var/lib/jenkins/workspace/edureka-pipeline/Edureka-ABCTech/src/main/webapp/WEB-INF/web.xml</webxml>
 				</configuration>	
-            </plugin>
+            		</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
