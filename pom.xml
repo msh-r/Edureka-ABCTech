@@ -37,7 +37,7 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>3.2.2</version>
         <configuration>
-          <webxml>src/main/webapp/WEB-INF/web.xml</webxml> <!-- Specify location of web.xml -->
+          <failOnMissingWebXml>false</failOnMissingWebXml> <!-- Specify location of web.xml -->
         </configuration>
       </plugin>
       <plugin>
